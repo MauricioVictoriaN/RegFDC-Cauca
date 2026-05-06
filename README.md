@@ -286,7 +286,7 @@ Para cuencas fuera de estos rangos, el script activa la advertencia de extrapola
 
 **Cita recomendada (formato APA):**
 
-> Victoria Niño, M. J. (2026). *RegFDC-Cauca v1.0.0: Regionalización de curvas de duración de caudales mediante el método del índice de caudal con memoria de larga dependencia en el sistema hidrológico del río Cauca, Colombia*. EngrXiv. https://github.com/MauricioVictoriaN/RegFDC-Cauca
+> Victoria Niño, M. J. (2026). *RegFDC-Cauca v1.0.0: Regionalización de curvas de duración de caudales mediante el método del índice de caudal con memoria de larga dependencia en el sistema hidrológico del río Cauca, Colombia*. EngrXiv. DOI: 
 
 **Entrada BibTeX:**
 
