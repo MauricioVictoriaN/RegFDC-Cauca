@@ -1,0 +1,95 @@
+═══════════════════════════════════════════════════════════════════
+  INFORME A — DIAGNÓSTICO TÉCNICO DEL MODELO
+  Proyecto: RegFDC_Cauca v1.0.0 | Fecha: 2026-05-05
+  Región: Sistema Río Cauca — Andes colombianos
+═══════════════════════════════════════════════════════════════════
+
+───────────────────────────────────────────────────────────────────
+  A1. CALIDAD DE DATOS DE ENTRADA
+───────────────────────────────────────────────────────────────────
+  Cuencas observadas         : 20
+  Cuencas a estimar          : 8
+  Período de registro        : 2015-01-01 → 2019-12-31
+  Outliers filtrados (total) : 623 registros
+
+  Correlación log(predictor) ~ log(μ)  [umbral ≥ 0.40]:
+    area_km2                               r = +0.9373  p = 0.0000  (*)
+    precipitacion_anual_mm                 r = +0.3880  p = 0.0909     
+    cn_promedio                            r = -0.4702  p = 0.0364  (*)
+    pendiente_media_pct                    r = -0.4486  p = 0.0472  (*)
+    coeficiente_escorrentia                r = +0.0672  p = 0.7783     
+    escorrentia_anual_mm                   r = +0.3847  p = 0.0940     
+
+  r_max = 0.9373   [OK]
+
+───────────────────────────────────────────────────────────────────
+  A2. DETECCIÓN DE EXTRAPOLACIÓN
+───────────────────────────────────────────────────────────────────
+  ⚠ 6 caso(s) fuera del rango observado:
+    C022    area_km2                             val=310.00    obs=[340, 18900]  [Bajo mínimo]
+    C026    area_km2                             val=290.00    obs=[340, 18900]  [Bajo mínimo]
+    C026    pendiente_media_pct                  val=44.80     obs=[8.4, 43.6]  [Sobre máximo]
+    C028    pendiente_media_pct                  val=45.20     obs=[8.4, 43.6]  [Sobre máximo]
+    C028    precipitacion_anual_mm               val=4120.00   obs=[1590, 3820]  [Sobre máximo]
+    C028    cn_promedio                          val=66.00     obs=[67, 80]  [Bajo mínimo]
+
+───────────────────────────────────────────────────────────────────
+  A3. REGIONALIZACIÓN HIDROLÓGICA
+───────────────────────────────────────────────────────────────────
+  Método      : Ward D2 — atributos físicos + metadatos ponderados
+  Regiones (k): 3
+  Cofenético  : 0.7562 [OK]
+  Silhouette  : 0.5039
+
+    Región 1 (n=7): C001, C002, C003, C005, C006, C015, C020
+    Región 2 (n=12): C004, C007, C008, C009, C010, C011, C012, C013, C014, C016, C017, C018
+    Región 3 (n=1): C019
+
+  Test Anderson-Darling [p > 0.05 = homogénea]:
+    Región 1 (n=7)  p = 0.9992  OK
+    Región 2 (n=12)  p = 0.0346  ⚠ HETEROGÉNEA
+
+───────────────────────────────────────────────────────────────────
+  A4. MODELO DE CAUDAL MEDIO (μ)
+───────────────────────────────────────────────────────────────────
+  Forma     : log(μ) ~ predictores | criterio BIC (k = log n)
+  Variables : log_area_km2, log_precipitacion_anual_mm
+  R²        : 0.9991
+  R² ajust. : 0.999   [OK]
+  σ (log)   : 0.0321
+  Correc. Jensen exp(σ²/2) = 1.0005
+  Coeficientes:
+    (Intercept)                  = -12.922609
+    log_area_km2                 = +0.990206
+    log_precipitacion_anual_mm   = +1.324677
+
+  ⚠ Cuencas influyentes (Cook > 4/n): C002, C007, C019
+
+───────────────────────────────────────────────────────────────────
+  A5. MEMORIA TEMPORAL — HURST POR CUENCA
+───────────────────────────────────────────────────────────────────
+  Umbral ARFIMA: H > 0.6 → ARFIMA(0,d,0)  |  H ≤ 0.6 → AR(1)
+    C001    H = 0.920  d = 0.420  [ARFIMA]
+    C002    H = 0.907  d = 0.407  [ARFIMA]
+    C003    H = 0.924  d = 0.424  [ARFIMA]
+    C004    H = 0.896  d = 0.396  [ARFIMA]
+    C005    H = 0.930  d = 0.430  [ARFIMA]
+    C006    H = 0.897  d = 0.397  [ARFIMA]
+    C007    H = 0.946  d = 0.446  [ARFIMA]
+    C008    H = 0.892  d = 0.392  [ARFIMA]
+    C009    H = 0.882  d = 0.382  [ARFIMA]
+    C010    H = 0.896  d = 0.396  [ARFIMA]
+    C011    H = 0.941  d = 0.441  [ARFIMA]
+    C012    H = 0.919  d = 0.419  [ARFIMA]
+    C013    H = 0.912  d = 0.412  [ARFIMA]
+    C014    H = 0.909  d = 0.409  [ARFIMA]
+    C015    H = 0.909  d = 0.409  [ARFIMA]
+    C016    H = 0.916  d = 0.416  [ARFIMA]
+    C017    H = 0.921  d = 0.421  [ARFIMA]
+    C018    H = 0.931  d = 0.431  [ARFIMA]
+    C019    H = 0.928  d = 0.428  [ARFIMA]
+    C020    H = 0.862  d = 0.362  [ARFIMA]
+
+═══════════════════════════════════════════════════════════════════
+  Generado: 2026-05-05 19:41:54 | v1.0.0
+═══════════════════════════════════════════════════════════════════

@@ -1,0 +1,85 @@
+═══════════════════════════════════════════════════════════════════
+  INFORME B — RESULTADOS Y GUÍA DE APLICABILIDAD
+  Proyecto: RegFDC_Cauca v1.0.0 | Fecha: 2026-05-05
+  Región: Sistema Río Cauca — Andes colombianos | Régimen bimodal
+═══════════════════════════════════════════════════════════════════
+
+───────────────────────────────────────────────────────────────────
+  B1. CAUDALES MEDIOS ESTIMADOS (IC 90%)
+───────────────────────────────────────────────────────────────────
+  Cuenca   μ (m³/s)   IC inf.   IC sup.   Región
+───────────────────────────────────────────────────────
+  C021        37.51      35.39      39.71   R2
+  C022        15.57      14.65      16.52   R2
+  C023        72.47      68.37      76.74   R1
+  C024        58.69      55.38      62.13   R2
+  C025        24.17      22.78      25.61   R2
+  C026        33.95      31.82      36.18   R1
+  C027        53.40      50.33      56.61   R1
+  C028        67.85      63.50      72.43   R1
+
+───────────────────────────────────────────────────────────────────
+  B2. SERIES SINTÉTICAS GENERADAS
+───────────────────────────────────────────────────────────────────
+  Período: 2015-01-01 → 2019-12-31 ( 1826 días)
+  Cuenca   H regional   d ARFIMA   Método     μ (m³/s)
+───────────────────────────────────────────────────────
+  C021     0.914        0.414      ARFIMA        37.51
+  C022     0.914        0.414      ARFIMA        15.57
+  C023     0.909        0.409      ARFIMA        72.47
+  C024     0.914        0.414      ARFIMA        58.69
+  C025     0.914        0.414      ARFIMA        24.17
+  C026     0.909        0.409      ARFIMA        33.95
+  C027     0.909        0.409      ARFIMA        53.40
+  C028     0.909        0.409      ARFIMA        67.85
+
+───────────────────────────────────────────────────────────────────
+  B3. VALIDACIÓN LEAVE-ONE-OUT (LOO)
+───────────────────────────────────────────────────────────────────
+  NSE   : 0.9956   [ref: > 0.65 aceptable]
+  KGE   : 0.9927   [ref: > 0.60 aceptable]
+  PBIAS : -0.02 %   [ref: |PBIAS| < 25%]
+  r Spearman: 0.9987
+
+  Intervalos de confianza 95% (bootstrap):
+  NSE  : [ 0.995 , 0.996 ]
+  KGE  : [ 0.988 , 0.996 ]
+  PBIAS: [ -0.23 %, 0.21 %]
+
+  Error por segmento de FDC:
+    Altos (F<0.20)            NSE= 0.967  KGE= 0.979  MAPE=  2.6%
+    Medios (0.20-0.80)        NSE= 0.992  KGE= 0.989  MAPE=  2.9%
+    Bajos (F>0.80)            NSE= 0.949  KGE= 0.958  MAPE=  7.7%
+
+───────────────────────────────────────────────────────────────────
+  CALIFICACIÓN GLOBAL: EXCELENTE
+───────────────────────────────────────────────────────────────────
+  Guía de uso según segmento de FDC:
+    F = 0.10 (Tr ≈ 10a)  → Verificar con análisis de frecuencias
+    F = 0.50 (Q medio)   → Mayor confiabilidad; uso directo
+    F = 0.85 (Q bajo)    → Estudios de disponibilidad hídrica
+    F = 0.95 (Q95)       → Usar IC inferior (estimación conservadora)
+
+
+───────────────────────────────────────────────────────────────────
+  B4. ARCHIVOS GENERADOS
+───────────────────────────────────────────────────────────────────
+  Directorio: resultados/
+  • RegFDC_Cauca _1.0.0_resultados.xlsx  — 14 hojas de resultados
+  • series_sinteticas_todas.csv   — series diarias, todas las cuencas
+  • series_sinteticas/             — un CSV por cuenca estimada
+  • A_diagnostico_tecnico.txt      — diagnóstico del proceso (Informe A)
+  • B_resultados_y_aplicabilidad   — resultados para el usuario (Informe B)
+  • graficos/G1_FDC_dimensionales  — FDC con IC 90%
+  • graficos/G2_FDC_regionales     — FDC adimensionales por región
+  • graficos/G3_Error_LOO          — MAPE y NSE a lo largo de la FDC
+  • graficos/G4_QQ_regional        — Q-Q por región (LOO)
+  • graficos/G5_Dendrograma_Ward   — árbol de clustering y silhouette
+  • graficos/G6_Serie_*            — ejemplo de serie sintética
+  • graficos/G7_Diagnostico_mu     — residuos y Cook del modelo μ
+  • graficos/G8_Escorrentia        — q específica por cuenca (L/s/km²)
+  • graficos/G9_Hurst_cuencas      — exponente Hurst y umbral ARFIMA
+
+═══════════════════════════════════════════════════════════════════
+  Generado: 2026-05-05 19:41:54 | v1.0.0
+═══════════════════════════════════════════════════════════════════
